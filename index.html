@@ -5,8 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        html{
+            font-size: 62.5%;
+        }
+
         body{
-            background-color: blue;
+            background-color: rgb(213, 213, 228);
+        }
+
+        .search-nav-products{
+            display: flex;
+            justify-content: center;
+            margin: 3rem;
         }
 
         li{
@@ -21,21 +36,17 @@
 <body>
     <main>
         <section>
-            <form action="">
+            <form action="" class="search-nav-products">
                 <input id="input-value" type="text" placeholder="Title">
                 <button id="search-button" type="button">Search</button>
             </form>
-            <ul id="category-list">
-                <li>Clothes</li>
-                <li>Electronics</li>
-                <li>Furniture</li>
-                <li>Shoes</li>
-                <li>Miscellaneous</li>
+            <ul id="category-list" class="categories-list-container">
+                <!--Category list elements-->
             </ul>
         </section>
         <section>
             <!--Products List container-->
-            <div></div>
+            <div class="main-list-container"></div>
             <!--User List container-->
             <div></div>
         </section>

@@ -1,4 +1,4 @@
-const API_URL =  "https://api.escuelajs.co/api/v1/products"
+const API_URL =  "https://api.escuelajs.co/api/v1"
 
 
 const input_value = document.querySelector("#input-value")
@@ -10,9 +10,6 @@ const category_list = document.querySelector("#category-list")
 const categories = category_list.children
 console.log(categories)
 
-for (let category of categories) {
-  category.onclick = fecthPosts;
-}
 
 /*
 async function fetchData(){
@@ -45,18 +42,53 @@ function sendHTTPRequest(method, url, data) {
 async function fecthPosts() {
     const responseData = await sendHTTPRequest(
       "GET",
-      API_URL
+      `${API_URL}/products`
     );
-    console.log(responseData);
+    console.log("Fetch All products",responseData);
 }
 
 
+async function fetchCategories(){
+  const response_categories = await sendHTTPRequest("GET",
+    `${API_URL}/categories`
+  )
+  console.log(response_categories)
+  console.log(typeof response_categories)
+
+  const categories_filtred =filter_content(response_categories,"name","New Category")
+  console.log(categories_filtred)
+
+  for (let category of categories_filtred){
+    const category_element = document.createElement('li')
+    category_element.id = category.id
+    category_element.textContent = category.name
+
+    category_element.addEventListener("click",()=>{
+      console.log(category_element.textContent)
+      fetch_products_by_category(category_element.id)
+    })
+
+    category_list.appendChild(category_element)
+  }
+}
+
+async function fetch_products_by_category(category_id){
+  const response_category_data = await sendHTTPRequest("GET",`${API_URL}/products/?categoryId=${category_id}`)
+  console.log(response_category_data)
+  const products_filtred = await filter_content(response_category_data,"title","New Product")
+  console.log(products_filtred)
+}
+
+function filter_content(array,property,name){
+  return array.filter(object => !object[property].includes(name))
+}
+
 async function fetch_by_title(product_name){
-    const response_title_data = await sendHTTPRequest("GET",`${API_URL}/?title=${product_name}`)
+    const response_title_data = await sendHTTPRequest("GET",`${API_URL}/products/?title=${product_name}`)
     console.log(response_title_data)
 }
 
 
-async function fetch_by_category(category){
-  const response_category_data = await sendHTTPRequest("GET",)
-}
+
+fetchCategories()
+//fecthPosts()
