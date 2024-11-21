@@ -8,16 +8,24 @@
         body{
             background-color: blue;
         }
+
+        li{
+            list-style: none;
+        }
+
+        li:hover{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <main>
         <section>
             <form action="">
-                <input type="text" placeholder="Title">
-                <button type="button">Search</button>
+                <input id="input-value" type="text" placeholder="Title">
+                <button id="search-button" type="button">Search</button>
             </form>
-            <ul>
+            <ul id="category-list">
                 <li>Clothes</li>
                 <li>Electronics</li>
                 <li>Furniture</li>
