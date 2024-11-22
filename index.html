@@ -33,6 +33,20 @@
             padding: 1rem 2rem;
         }
 
+        .categories-list-container{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .category-element{
+            background-color: brown;
+            margin: 1rem;
+            padding: 1rem;
+            font-size: 1rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
         li{
             list-style: none;
         }
@@ -41,11 +55,23 @@
             cursor: pointer;
         }
 
-        /*.main-list-container{
-        }*/
+        .main-list-container{
+            margin: 3rem;
+        }
 
-        .image-container{
-            margin: 2rem ;
+
+        .product-container{
+            background-color: white ;
+            margin: 2rem;
+            padding: 1rem 2rem;
+            max-width: 30rem;
+            min-width: 10rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-container{ 
             padding: 1rem 2rem;
         }
 
@@ -60,8 +86,8 @@
             </form>
             <ul id="category-list" class="categories-list-container">
                 <!--Category list elements
-                -->
                 <li class="category-element"></li>
+                -->
             </ul>
         </section>
         <section>
@@ -78,8 +104,6 @@
                     </div>
                 -->
             </div>
-            <!--User List container-->
-            <div></div>
         </section>
     </main>
     <script src="src.js">

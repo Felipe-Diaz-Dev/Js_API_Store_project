@@ -63,6 +63,7 @@ async function fetchCategories(){
     const category_element = document.createElement('li')
     category_element.id = category.id
     category_element.textContent = category.name
+    category_element.classList.add('category-element')
     
     category_element.addEventListener("click",()=>{
       console.log(category_element.textContent)
@@ -87,20 +88,25 @@ function filter_content(array,property,name){
   return array.filter(object => !object[property].includes(name))
 }
 
+let random_list;
+
 function render_products(array){
   products_list.textContent = ""
+  random_list = array.length;
+  console.log(random_list)
   array.forEach(element => {
     console.log("Howdy")
     const product = document.createRange().createContextualFragment(`
-      <div>
+      <div class="product-container">
           <div class="image-container">
-          <img src="" alt="Image">
+          <img src="https://picsum.photos/200/250?random=${random_list}" alt="Image">
           </div>
           <h2>${element.title}</h2>
           <p>${element.price}</p>
           <p>${element.description}</p>
       </div>`)
-
+      random_list++;
+      console.log(random_list)
       products_list.append(product)
   });
 }
@@ -110,6 +116,8 @@ function render_products(array){
 async function fetch_by_title(product_name){
     const response_title_data = await sendHTTPRequest("GET",`${API_URL}/products/?title=${product_name}`)
     console.log(response_title_data)
+
+    render_products(response_title_data)
 }
 
 
