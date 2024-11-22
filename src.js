@@ -10,6 +10,7 @@ const category_list = document.querySelector("#category-list")
 const categories = category_list.children
 console.log(categories)
 
+const products_list = document.querySelector(".main-list-container")
 
 /*
 async function fetchData(){
@@ -62,7 +63,7 @@ async function fetchCategories(){
     const category_element = document.createElement('li')
     category_element.id = category.id
     category_element.textContent = category.name
-
+    
     category_element.addEventListener("click",()=>{
       console.log(category_element.textContent)
       fetch_products_by_category(category_element.id)
@@ -72,16 +73,39 @@ async function fetchCategories(){
   }
 }
 
+
 async function fetch_products_by_category(category_id){
   const response_category_data = await sendHTTPRequest("GET",`${API_URL}/products/?categoryId=${category_id}`)
   console.log(response_category_data)
   const products_filtred = await filter_content(response_category_data,"title","New Product")
+
   console.log(products_filtred)
+  render_products(products_filtred)
 }
 
 function filter_content(array,property,name){
   return array.filter(object => !object[property].includes(name))
 }
+
+function render_products(array){
+  products_list.textContent = ""
+  array.forEach(element => {
+    console.log("Howdy")
+    const product = document.createRange().createContextualFragment(`
+      <div>
+          <div class="image-container">
+          <img src="" alt="Image">
+          </div>
+          <h2>${element.title}</h2>
+          <p>${element.price}</p>
+          <p>${element.description}</p>
+      </div>`)
+
+      products_list.append(product)
+  });
+}
+
+//https://picsum.photos/200
 
 async function fetch_by_title(product_name){
     const response_title_data = await sendHTTPRequest("GET",`${API_URL}/products/?title=${product_name}`)

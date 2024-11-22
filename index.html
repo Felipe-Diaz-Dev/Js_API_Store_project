@@ -22,6 +22,15 @@
             display: flex;
             justify-content: center;
             margin: 3rem;
+            padding: 3rem;
+        }
+
+        .search-nav-products input{
+            width:50%;
+            border:none;
+            border-radius: 1rem;
+            font-size: 1.5rem;
+            padding: 1rem 2rem;
         }
 
         li{
@@ -31,6 +40,15 @@
         li:hover{
             cursor: pointer;
         }
+
+        /*.main-list-container{
+        }*/
+
+        .image-container{
+            margin: 2rem ;
+            padding: 1rem 2rem;
+        }
+
     </style>
 </head>
 <body>
@@ -41,12 +59,25 @@
                 <button id="search-button" type="button">Search</button>
             </form>
             <ul id="category-list" class="categories-list-container">
-                <!--Category list elements-->
+                <!--Category list elements
+                -->
+                <li class="category-element"></li>
             </ul>
         </section>
         <section>
             <!--Products List container-->
-            <div class="main-list-container"></div>
+            <div class="main-list-container">
+                <!--
+                    <div>
+                        <div class="image-container">
+                            <img src="" alt="">
+                        </div>
+                        <h2>Title</h2>
+                        <p>Price</p>
+                        <p>Description</p>
+                    </div>
+                -->
+            </div>
             <!--User List container-->
             <div></div>
         </section>
