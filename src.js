@@ -1,12 +1,10 @@
 const API_URL =  "https://api.escuelajs.co/api/v1"
 
 
+const form = document.querySelector(".search-nav-products");
 const input_value = document.querySelector("#input-value")
-
 const search_button = document.querySelector("#search-button")
-
 const category_list = document.querySelector("#category-list")
-
 const categories = category_list.children
 console.log(categories)
 
@@ -19,13 +17,19 @@ async function fetchData(){
     console.log(data)
 }
 fetchData()
-*/    
+*/
 
-search_button.addEventListener("click",function(event){
-  event.preventDefault
+
+form.addEventListener("submit", start_Rendering);
+search_button.addEventListener("click",start_Rendering)
+
+function start_Rendering(event){
+  event.preventDefault();
   fetch_by_title(input_value.value)
   console.log(input_value.value)
-})
+}
+
+
 
 function sendHTTPRequest(method, url, data) {
     return fetch(url, {
@@ -56,7 +60,7 @@ async function fetchCategories(){
   console.log(response_categories)
   console.log(typeof response_categories)
 
-  const categories_filtred =filter_content(response_categories,"name","New Category")
+  const categories_filtred = filter_content(response_categories,"name","New Category")
   console.log(categories_filtred)
 
   for (let category of categories_filtred){
@@ -94,21 +98,26 @@ function render_products(array){
   products_list.textContent = ""
   random_list = array.length;
   console.log(random_list)
-  array.forEach(element => {
-    console.log("Howdy")
-    const product = document.createRange().createContextualFragment(`
-      <div class="product-container">
-          <div class="image-container">
-          <img src="https://picsum.photos/200/250?random=${random_list}" alt="Image">
-          </div>
-          <h2>${element.title}</h2>
-          <p>${element.price}</p>
-          <p>${element.description}</p>
-      </div>`)
-      random_list++;
-      console.log(random_list)
-      products_list.append(product)
-  });
+
+  if(random_list <= 0){
+      product_not_found()
+  }else{
+    array.forEach(element => {
+        console.log("Howdy")
+        const product = document.createRange().createContextualFragment(`
+          <div class="product-container">
+              <div class="image-container">
+              <img src="https://picsum.photos/200/250?random=${random_list}" alt="Image">
+              </div>
+              <h2>${element.title}</h2>
+              <p>${element.price}</p>
+              <p>${element.description}</p>
+          </div>`)
+          random_list++;
+          console.log(random_list)
+          products_list.append(product)
+    });   
+  }
 }
 
 //https://picsum.photos/200
@@ -120,7 +129,17 @@ async function fetch_by_title(product_name){
     render_products(response_title_data)
 }
 
-
+function product_not_found(){
+  console.log("No content")
+  const not_found = document.createRange().createContextualFragment(
+    `
+    <div class="product-not-found">
+    <h2>Product not found</h2>
+    <p>the product was not found or doesn't exist, try again</p>
+    </div>`
+  )
+  products_list.append(not_found)
+}
 
 fetchCategories()
 //fecthPosts()
