@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+
+        :root{
+            --dark-blue: #93d3c7;
+            --blue: #b1e2d8;
+            --light-blue:#cef1ea;
+            --light-gray: #e9faf7;
+            --white:#fcfffe;
+            --darK-font:#171f1e;
+        }
+
         *{
             margin: 0;
             padding: 0;
@@ -15,13 +25,13 @@
         }
 
         body{
-            background-color: rgb(213, 213, 228);
+            background: linear-gradient(360deg, var(--dark-blue) 26.69%, var(--light-gray) 100%) no-repeat center center fixed;
         }
 
         .search-nav-products{
             display: flex;
             justify-content: center;
-            margin: 3rem;
+            margin: 1rem;
             padding: 3rem;
         }
 
@@ -40,11 +50,34 @@
         }
 
         .category-element{
-            background-color: brown;
+            background-color: var(--blue);
+            color: var(--darK-font) ;
             margin: 1rem;
-            padding: 1rem;
-            font-size: 1rem;
-            font-family: 'Times New Roman', Times, serif;
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border-radius: 1rem;
+        }
+
+        .category-element:hover{
+            cursor: pointer;
+            background-color: var(--light-gray);
+        }
+
+        .search-button{
+            background-color: var(--dark-blue);
+            color: var(--darK-font) ;
+            border: none;
+            margin-left: 1rem ;
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border-radius: 1rem;
+        }
+
+        .search-button:hover{
+            cursor: pointer;
+            background-color: var(--light-gray);
         }
 
         li{
@@ -56,19 +89,29 @@
         }
 
         .main-list-container{
-            margin: 3rem;
+            padding: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        
         }
-
-
+        
+        
         .product-container{
-            background-color: white ;
-            margin: 2rem;
-            padding: 1rem 2rem;
+            background-color: var(--white) ;
+            margin: 1.5rem;
+            padding: 2.5rem 1.5rem;
             max-width: 30rem;
             min-width: 10rem;
             display: flex;
             flex-direction: column;
             align-items: center;
+            border-radius: 1rem;
+        }
+
+        .product-container > *{
+            margin: 0.5rem;
+            font-size: 1.5rem;
         }
 
         .image-container{ 
@@ -82,7 +125,7 @@
         <section>
             <form action="" class="search-nav-products">
                 <input id="input-value" type="text" placeholder="Title">
-                <button id="search-button" type="button">Search</button>
+                <button id="search-button" type="button" class="search-button">Search</button>
             </form>
             <ul id="category-list" class="categories-list-container">
                 <!--Category list elements
