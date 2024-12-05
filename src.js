@@ -10,6 +10,8 @@ console.log(categories)
 
 const products_list = document.querySelector(".main-list-container")
 
+let discarted_words = ["New Category","string"]
+
 /*
 async function fetchData(){
     const res = await fetch(API_URL)
@@ -60,8 +62,8 @@ async function fetchCategories(){
   console.log(response_categories)
   console.log(typeof response_categories)
 
-  const categories_filtred = filter_content(response_categories,"name","New Category")
-  console.log(categories_filtred)
+  const categories_filtred = filter_content(response_categories,"name",discarted_words)
+  console.log("FILTRED CATEGORIES",categories_filtred)
 
   for (let category of categories_filtred){
     const category_element = document.createElement('li')
@@ -82,14 +84,28 @@ async function fetchCategories(){
 async function fetch_products_by_category(category_id){
   const response_category_data = await sendHTTPRequest("GET",`${API_URL}/products/?categoryId=${category_id}`)
   console.log(response_category_data)
-  const products_filtred = await filter_content(response_category_data,"title","New Product")
+  const products_filtred = await filter_content(response_category_data,"title",discarted_words)
 
   console.log(products_filtred)
   render_products(products_filtred)
 }
 
-function filter_content(array,property,name){
-  return array.filter(object => !object[property].includes(name))
+function filter_content(array,property,values){
+  const seen = {}
+
+  return array.filter(category =>
+    !values.some(value => category[property] == value)
+  ).filter(category => {
+    if(seen[category[property]]){
+      return false;
+    }else{
+      seen[category[property]] = true
+      //console.log(seen)
+      return true
+    }
+  })
+
+
 }
 
 let random_list;
@@ -136,7 +152,8 @@ function product_not_found(){
     <div class="product-not-found">
     <h2>Product not found</h2>
     <p>the product was not found or doesn't exist, try again</p>
-    </div>`
+    </div>
+    `
   )
   products_list.append(not_found)
 }
